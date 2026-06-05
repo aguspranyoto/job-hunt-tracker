@@ -1,0 +1,15 @@
+services:
+  job-hunt-tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: job-hunt-tracker
+    restart: unless-stopped
+    ports:
+      - "3003:3003"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+      - HOSTNAME=0.0.0.0
