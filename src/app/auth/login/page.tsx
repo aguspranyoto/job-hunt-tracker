@@ -51,7 +51,7 @@ export default function AuthPage() {
         if (result.error) {
           setError(
             result.error.message ||
-              "Registration failed. You may not be authorized to register."
+            "Registration failed. You may not be authorized to register."
           );
         } else {
           router.push("/");
@@ -89,11 +89,6 @@ export default function AuthPage() {
                 ? "Sign in to your Job Hunt Tracker"
                 : "Register to start tracking your applications"}
             </CardDescription>
-            {!isLogin && (
-              <p className="mt-2 text-xs text-muted-foreground">
-                * Registration is restricted to authorized email addresses.
-              </p>
-            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -154,6 +149,12 @@ export default function AuthPage() {
               <div className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
                 {error}
               </div>
+            )}
+
+            {!isLogin && (
+              <p className="text-sm text-center text-muted-foreground">
+                * Registration is restricted to authorized email addresses.
+              </p>
             )}
 
             <Button
