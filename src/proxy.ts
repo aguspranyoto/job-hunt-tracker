@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Public paths that don't require authentication
   const publicPaths = ["/auth/login", "/auth/register", "/api/auth"];
   const isPublicPath = publicPaths.some((path) => pathname.startsWith(path));
 
-  // Get session token from cookies
+  // Get session token from cookies (handling both secure and insecure variants)
   const sessionToken =
-    request.cookies.get("better-auth.session_token")?.value;
+    request.cookies.get("better-auth.session_token")?.value ||
+    request.cookies.get("__Secure-better-auth.session_token")?.value;
 
   // If no session and trying to access protected route, redirect to login
   if (!sessionToken && !isPublicPath) {
