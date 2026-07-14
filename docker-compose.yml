@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_BETTER_AUTH_URL=https://jh.agusp.com
     container_name: job-hunt-tracker
     restart: unless-stopped
     ports:
@@ -13,3 +15,9 @@ services:
       - NODE_ENV=production
       - PORT=3003
       - HOSTNAME=0.0.0.0
+    networks:
+      - supabase_default
+
+networks:
+  supabase_default:
+    external: true

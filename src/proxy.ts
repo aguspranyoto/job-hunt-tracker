@@ -4,7 +4,7 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Public paths that don't require authentication
-  const publicPaths = ["/auth/login", "/auth/register", "/api/auth"];
+  const publicPaths = ["/auth/login", "/auth/register", "/api/auth", "/api/jobs", "/mobile"];
   const isPublicPath = publicPaths.some((path) => pathname.startsWith(path));
 
   // Get session token from cookies (handling both secure and insecure variants)
